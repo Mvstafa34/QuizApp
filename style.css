@@ -4,7 +4,6 @@
 }
 
 body {
-    min-height: 100vh;
     background-color: #FFF9EF !important;
 }
 
@@ -16,4 +15,49 @@ body {
 .progress {
     background-color: #AEAEAE !important;
     border-radius: 0 !important;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    display: flex;
+    flex-direction: row !important;
+    min-width: unset !important; 
+}
+
+.navbar span {
+    color: #AEAEAE;
+}
+
+.navbar img {
+    height: 95px;
+    width: 110px;
+}
+
+.navbar a {
+    margin: 0 auto;
+}
+
+.navbar {
+    background-color: #27355C !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.container-fluid {
+    background-color: #27355C;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.nav-selection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
