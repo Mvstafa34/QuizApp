@@ -15,6 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 </head>
 
 <body>
@@ -27,9 +28,10 @@
             <nav class="navbar card">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">
-                        <img src="./img/logo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-                      </a>
-                    <div class="nav-selection">
+                        <img src="./img/logo.png" alt="Logo" width="30" height="24"
+                            class="d-inline-block align-text-top">
+                    </a>
+                    <div class="nav-selection gap-3">
                         <span class="navbar-brand mb-0 h1">HTML</span>
                         <span class="navbar-brand mb-0 h1">CSS</span>
                         <span class="navbar-brand mb-0 h1">JS</span>
@@ -37,13 +39,36 @@
                     </div>
                 </div>
             </nav>
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+            <div class="card-body d-flex flex-column align-items-center">
+                <h5 class="card-title text-center">Frage</h5>
+                <div class="answer-cards d-flex flex-column justify-content-between flex-1 gap-3">
+                    <div class="card ">
+                        <div class="card-body">
+                            Antwort
+                        </div>
+                    </div>
+                    <div class="card ">
+                        <div class="card-body">
+                            Antwort
+                        </div>
+                    </div>
+                    <div class="card ">
+                        <div class="card-body">
+                            Antwort
+                        </div>
+                    </div>
+                    <div class="card ">
+                        <div class="card-body">
+                            Antwort
+                        </div>
+                    </div>
+                </div>
+                <div class="position-absolute lr-buttons">
+                    <div class="d-flex justify-content-between">
+                        <i class="bi bi-chevron-left mr-auto"></i>
+                        <i class="bi bi-chevron-right pr-5"></i>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

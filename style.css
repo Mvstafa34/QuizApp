@@ -5,6 +5,7 @@
 
 body {
     background-color: #FFF9EF !important;
+    overflow: hidden;
 }
 
 .progress-bar {
@@ -30,6 +31,11 @@ body {
     min-width: unset !important; 
 }
 
+.card-title {
+    margin: 1rem 0 2rem 0 !important;
+    font-weight: bold;
+}
+
 .navbar span {
     color: #AEAEAE;
 }
@@ -47,6 +53,7 @@ body {
     background-color: #27355C !important;
     border-top-right-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
+    padding: 1rem 0 !important;
 }
 
 .container-fluid {
@@ -54,10 +61,29 @@ body {
     display: flex;
     flex-direction: column;
     gap: 30px;
+    padding: 0 2rem !important;
 }
 
 .nav-selection {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+}
+
+.lr-buttons {
+    width: -webkit-fill-available;
+    bottom: -50px;
+}
+
+.lr-buttons i {
+    padding: 8px 12px 8px 12px;
+
+    background-color: #DAE0EF;
+    border-radius: 50%;
+}
+
+.answer-cards {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2.5rem;
 }
