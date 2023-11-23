@@ -1,0 +1,19 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+    background-color: #FFF9EF !important;
+}
+
+.progress-bar {
+    background-color: #27355C !important;
+    border-radius: 0 0.5rem 0.5rem 0 !important;
+}
+
+.progress {
+    background-color: #AEAEAE !important;
+    border-radius: 0 !important;
+}
