@@ -33,7 +33,7 @@
                     </a>
                     <div class="flex-grow-1 flex-shrink-1 d-flex flex-column justify-content-center">
                         <div class="nav-selection gap-3">
-                            <span class="navbar-brand mb-0 h1">HTML</span>
+                            <span class="navbar-brand mb-0 h1" onclick="loadHTML()">HTML</span>
                             <span class="navbar-brand mb-0 h1">CSS</span>
                             <span class="navbar-brand mb-0 h1">JS</span>
                             <span class="navbar-brand mb-0 h1">Bitcoin</span>
@@ -42,30 +42,30 @@
                 </div>
             </nav>
             <div class="title card-body d-flex flex-column align-items-center">
-                <h5 class="card-title text-center">Frage</h5>
+                <h5 id="question" class="card-title text-center">Frage</h5>
                 <div class="answer-cards d-flex flex-column justify-content-between flex-1 gap-4">
-                    <div class="card ">
+                    <div class="card" onclick="answer(1)">
                         <div class="card-body">
                             <div class="letter"><strong>A</strong></div>
-                            Antwort
+                            <div id="answer_1">Antwort</div>
                         </div>
                     </div>
-                    <div class="card ">
+                    <div  class="card" onclick="answer(2)">
                         <div class="card-body">
                             <div class="letter"><strong>B</strong></div>
-                            Antwort
+                            <div id="answer_2">Antwort</div>
                         </div>
                     </div>
-                    <div class="card ">
+                    <div class="card" onclick="answer(3)">
                         <div class="card-body">
                             <div class="letter"><strong>C</strong></div>
-                            Antwort
+                            <div id="answer_3">Antwort</div>
                         </div>
                     </div>
-                    <div class="card ">
+                    <div  class="card" onclick="answer(4)">
                         <div class="card-body">
                             <div class="letter"><strong>D</strong></div>
-                            Antwort
+                            <div id="answer_4">Antwort</div>
                         </div>
                     </div>
                 </div>
