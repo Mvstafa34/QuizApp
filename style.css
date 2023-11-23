@@ -28,7 +28,13 @@ body {
 .card {
     display: flex;
     flex-direction: row !important;
-    min-width: unset !important; 
+    min-width: unset !important;
+}
+
+.card:not(.main, .navbar) {
+    background-color: #FFFFFF !important;
+    border-radius: 0 !important;
+    border: 0 !important;
 }
 
 .card-title {
@@ -38,6 +44,10 @@ body {
 
 .navbar span {
     color: #AEAEAE;
+}
+
+.navbar span:hover {
+    color: #FFFFFF;
 }
 
 .navbar img {
@@ -96,11 +106,19 @@ body {
     width: 30px;
     height: 30px;
     margin-right: 2.5rem;
-    padding: 18px;
+    padding: 24px;
+    font-size: 1.5rem;
     background-color: #D7D7D7;
 }
 
 .card-body:not(.title) {
     display: flex;
     align-items: center;
+    font-weight: 500;
+    padding: 0.5rem;
+}
+
+.title {
+    background-color: #F7F7F7;
+    border-radius: 0.375rem;
 }
