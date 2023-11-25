@@ -58,12 +58,12 @@ let questions = [
 ];
 
 let currentQuestion = 0;
-
 let rightAnswers = 0;
 
 function loadHTML() {
 
     if (currentQuestion >= questions.length) {
+        // Show End Screen
         document.getElementById('question').classList.add('d-none');
         document.getElementById('answer_cards').classList.add('d-none');
         document.getElementById('buttons').classList.add('d-none');
@@ -71,7 +71,8 @@ function loadHTML() {
         document.getElementById('amount_of_questions').innerHTML = questions.length;
         document.getElementById('right_answers').innerHTML = rightAnswers;
         
-    } else {
+    } else { // Show Question
+
         let question = questions[currentQuestion];
 
         document.getElementById('question').innerHTML = question['question'];
@@ -90,6 +91,7 @@ function answer(answerNum) {
 
     if (answerNum == question['right_answer']) {
         clickedAnswer.classList.add('bg-success');
+        rightAnswers++;
     } else {
         clickedAnswer.classList.add('bg-danger');
         rightAnswer.classList.add('bg-success');
@@ -102,6 +104,7 @@ function answer(answerNum) {
 
 function nextQuestion() {
     currentQuestion++;
+    renderProgressBar()
     document.getElementById('right_button').disabled = true;
     document.getElementById('left_button').disabled = false;
     document.getElementById('previous_button').classList.remove('disabled');
@@ -131,4 +134,23 @@ function resetButtons() {
         button.classList.remove('bg-danger');
         button.classList.remove('bg-success');
     }
+}
+
+
+function renderProgressBar() {
+    let percent = currentQuestion/ questions.length;
+    percent = percent * 100;
+    document.getElementById('progress_bar').style.width = `${percent}%`;
+}
+
+
+function restartGame() {
+    currentQuestion = 0;
+    rightAnswers = 0;
+    document.getElementById('end_screen').classList.add('d-none'); // Hide End Screen
+    document.getElementById('question').classList.remove('d-none'); // Show Question Body
+    document.getElementById('answer_cards').classList.remove('d-none');
+    document.getElementById('buttons').classList.remove('d-none'); 
+
+    renderProgressBar();
 }

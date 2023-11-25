@@ -44,7 +44,8 @@ body {
 
 .card-title {
     margin: 1rem 0 2rem 0 !important;
-    font-weight: bold;
+    font-weight: 500;
+
 }
 
 .navbar span {
@@ -108,6 +109,11 @@ body {
     margin-bottom: 2.5rem;
 }
 
+.answer {
+    font-weight: 400;
+    font-size: 20px;
+}
+
 .letter {
     display: flex;
     justify-content: center;
@@ -118,6 +124,10 @@ body {
     padding: 24px;
     font-size: 1.5rem;
     background-color: #D7D7D7;
+}
+
+.letter strong {
+    font-weight: 500;
 }
 
 .card-body:not(.title) {
