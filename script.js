@@ -63,6 +63,7 @@ let currentQuestion = 0;
 
 function loadHTML() {
     let question = questions[currentQuestion];
+
     document.getElementById('question').innerHTML = question['question'];
     document.getElementById('answer_1').innerHTML = question['answer_1'];
     document.getElementById('answer_2').innerHTML = question['answer_2'];
@@ -73,15 +74,39 @@ function loadHTML() {
 
 function answer(answerNum) {
     let question = questions[currentQuestion];
+    let rightAnswer = document.getElementById(`answer_${question['right_answer']}`).parentNode;
     let clickedAnswer = document.getElementById(`answer_${answerNum}`).parentNode;
-    let clickedAnswerLetter = document.getElementById(`answer_${answerNum}`).previousElementSibling;
+
     if (answerNum == question['right_answer']) {
-        clickedAnswer.style.backgroundColor = '#B7F799';
-        clickedAnswerLetter.style.backgroundColor = '#4EBE19';
-        clickedAnswerLetter.firstElementChild.style.color = '#FFFFFF';
+        clickedAnswer.classList.add('bg-success');
     } else {
-        clickedAnswer.style.backgroundColor = '#FFA3A4';
-        clickedAnswerLetter.style.backgroundColor = '#F91819';
-        clickedAnswerLetter.firstElementChild.style.color = '#FFFFFF';
+        clickedAnswer.classList.add('bg-danger');
+        rightAnswer.classList.add('bg-success');
+    }
+    document.getElementById('next_button').classList.remove('disabled');
+}
+
+
+function nextQuestion() {
+    currentQuestion++;
+    resetButtons();
+    loadHTML();
+}
+
+
+function previousQuestion() {
+    currentQuestion--;
+    resetButtons();
+    loadHTML();
+}
+
+
+function resetButtons() {
+    document.getElementById('next_button').classList.add('disabled');
+
+    for (let i = 1; i < 5; i++) {
+        let button = document.getElementById(`answer_${i}`).parentNode;
+        button.classList.remove('bg-danger');
+        button.classList.remove('bg-success');
     }
 }

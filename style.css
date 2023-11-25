@@ -122,3 +122,28 @@ body {
     background-color: #F7F7F7;
     border-radius: 0.375rem;
 }
+
+.card .bg-success {
+    background-color: #B7F799 !important;
+}
+
+.bg-success div:not(.answer) {
+    background-color: #4EBE19 !important;
+}
+
+.bg-success strong, .bg-danger strong {
+    color: #FFFFFF !important;
+}
+
+.card .bg-danger {
+    background-color: #FFA3A4 !important;
+}
+
+.bg-danger div:not(.answer) {
+    background-color: #F91819 !important;
+}
+
+.disabled {
+    filter: opacity(25%);
+}
+

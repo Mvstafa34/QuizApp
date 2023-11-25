@@ -47,32 +47,32 @@
                     <div class="card" onclick="answer(1)">
                         <div class="card-body">
                             <div class="letter"><strong>A</strong></div>
-                            <div id="answer_1">Antwort</div>
+                            <div class="answer" id="answer_1">Antwort</div>
                         </div>
                     </div>
                     <div  class="card" onclick="answer(2)">
                         <div class="card-body">
                             <div class="letter"><strong>B</strong></div>
-                            <div id="answer_2">Antwort</div>
+                            <div class="answer" id="answer_2">Antwort</div>
                         </div>
                     </div>
                     <div class="card" onclick="answer(3)">
                         <div class="card-body">
                             <div class="letter"><strong>C</strong></div>
-                            <div id="answer_3">Antwort</div>
+                            <div class="answer" id="answer_3">Antwort</div>
                         </div>
                     </div>
                     <div  class="card" onclick="answer(4)">
                         <div class="card-body">
                             <div class="letter"><strong>D</strong></div>
-                            <div id="answer_4">Antwort</div>
+                            <div class="answer" id="answer_4">Antwort</div>
                         </div>
                     </div>
                 </div>
                 <div class="position-absolute lr-buttons">
                     <div class="d-flex justify-content-between">
-                        <img src="./img/icons8-zurück-64.png" alt="Zurück">
-                        <img src="./img/icons8-vorwärts-64.png" alt="Weiter">
+                        <img id="previous_button" onclick="previousQuestion()" class="disabled" src="./img/icons8-zurück-64.png" alt="Zurück">
+                        <img id="next_button" onclick="nextQuestion()" class="disabled" src="./img/icons8-vorwärts-64.png" alt="Weiter">
                     </div>
                 </div>
             </div>
