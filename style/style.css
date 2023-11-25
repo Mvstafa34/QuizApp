@@ -1,6 +1,7 @@
 * {
     padding: 0;
     margin: 0;
+    font-family: 'Rubik';
 }
 
 body {
@@ -23,6 +24,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.main {
+    min-height: 50vh;
 }
 
 .card {
@@ -77,6 +82,10 @@ body {
 .nav-selection {
     display: flex;
     flex-direction: column;
+}
+
+.nav-selection span {
+    font-weight: 400;
 }
 
 .lr-buttons {
@@ -147,3 +156,43 @@ body {
     filter: opacity(25%);
 }
 
+.left-right {
+    border-radius: 50%;
+    border: 0;
+}
+
+.d-none {
+    display: none !important;
+}
+
+.trophy {
+    position: absolute;
+    right: 0;
+    height: 200px;
+}
+
+.brain-result {
+    height: 100px;
+}
+
+.share {
+    border: 0;
+    background-color: #193CE9;
+    color: #FFFFFF;
+    padding: 6px 50px;
+    border-radius: 10px;
+}
+
+.replay {
+    color: #193CE9;
+}
+
+.score {
+    color: #F38630;
+    margin-right: 50px;
+}
+
+.end-screen h1 {
+    font-weight: 700;
+    font-size: 20px;
+}

@@ -57,18 +57,29 @@ let questions = [
     }
 ];
 
-
 let currentQuestion = 0;
 
+let rightAnswers = 0;
 
 function loadHTML() {
-    let question = questions[currentQuestion];
 
-    document.getElementById('question').innerHTML = question['question'];
-    document.getElementById('answer_1').innerHTML = question['answer_1'];
-    document.getElementById('answer_2').innerHTML = question['answer_2'];
-    document.getElementById('answer_3').innerHTML = question['answer_3'];
-    document.getElementById('answer_4').innerHTML = question['answer_4'];
+    if (currentQuestion >= questions.length) {
+        document.getElementById('question').classList.add('d-none');
+        document.getElementById('answer_cards').classList.add('d-none');
+        document.getElementById('buttons').classList.add('d-none');
+        document.getElementById('end_screen').classList.remove('d-none');
+        document.getElementById('amount_of_questions').innerHTML = questions.length;
+        document.getElementById('right_answers').innerHTML = rightAnswers;
+        
+    } else {
+        let question = questions[currentQuestion];
+
+        document.getElementById('question').innerHTML = question['question'];
+        document.getElementById('answer_1').innerHTML = question['answer_1'];
+        document.getElementById('answer_2').innerHTML = question['answer_2'];
+        document.getElementById('answer_3').innerHTML = question['answer_3'];
+        document.getElementById('answer_4').innerHTML = question['answer_4'];
+    }
 }
 
 
@@ -83,12 +94,17 @@ function answer(answerNum) {
         clickedAnswer.classList.add('bg-danger');
         rightAnswer.classList.add('bg-success');
     }
+
+    document.getElementById('right_button').disabled = false;
     document.getElementById('next_button').classList.remove('disabled');
 }
 
 
 function nextQuestion() {
     currentQuestion++;
+    document.getElementById('right_button').disabled = true;
+    document.getElementById('left_button').disabled = false;
+    document.getElementById('previous_button').classList.remove('disabled');
     resetButtons();
     loadHTML();
 }
@@ -96,6 +112,12 @@ function nextQuestion() {
 
 function previousQuestion() {
     currentQuestion--;
+
+    if (currentQuestion == 0) {
+        document.getElementById('left_button').disabled = true;
+        document.getElementById('previous_button').classList.add('disabled');
+    }
+
     resetButtons();
     loadHTML();
 }
