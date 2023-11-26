@@ -9,30 +9,21 @@ let questionsCoding = [
         "chosen_answer": 0
     },
     {
-        "question": "Was bedeutet das HTML Tag &lt;a&gt;?",
-        "answer_1": "Text Fett",
-        "answer_2": "Container",
-        "answer_3": "Ein Link",
-        "answer_4": "Kursiv",
+        "question": "Wofür steht CSS?",
+        "answer_1": "Colorful Style Sheets",
+        "answer_2": "Computer Style Sheets",
+        "answer_3": "Cascading Style Sheets",
+        "answer_4": "Creative Style Sheets",
         "right_answer": 3,
         "chosen_answer": 0
     },
     {
-        "question": "Wie bindet man eine Website in eine Website ein?",
-        "answer_1": "&lt;iframe&gt;, &lt;frame&gt;, und &lt;frameset&gt;",
-        "answer_2": "&lt;iframe&gt;",
-        "answer_3": "&lt;frame&gt;",
-        "answer_4": "&lt;frameset&gt;",
+        "question": "Wie schreibt man eine IF-Bedingung in JavaScript?",
+        "answer_1": "if i == 5 then",
+        "answer_2": "if (i == 5)",
+        "answer_3": "if i = 5",
+        "answer_4": "if i = 5 then",
         "right_answer": 2,
-        "chosen_answer": 0
-    },
-    {
-        "question": "Wie stellt man Text am BESTEN fett dar?",
-        "answer_1": "&lt;strong&gt;",
-        "answer_2": "CSS nutzen",
-        "answer_3": "&lt;bold&gt;",
-        "answer_4": "&lt;b&gt;",
-        "right_answer": 1,
         "chosen_answer": 0
     },
     {
@@ -41,6 +32,15 @@ let questionsCoding = [
         "answer_2": "max",
         "answer_3": "from",
         "answer_4": "spellcheck",
+        "right_answer": 1,
+        "chosen_answer": 0
+    },
+    {
+        "question": "Welches ist die korrekte CSS Syntax?",
+        "answer_1": "&lt;strong&gt;",
+        "answer_2": "CSS nutzen",
+        "answer_3": "&lt;bold&gt;",
+        "answer_4": "&lt;b&gt;",
         "right_answer": 1,
         "chosen_answer": 0
     },

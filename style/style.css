@@ -212,6 +212,7 @@ body {
     font-weight: 700;
     font-size: 20px;
     text-align: center;
+    z-index: 1;
 }
 
 .start-screen {
@@ -263,7 +264,14 @@ body {
 
 /* ------------------- Media Queries ------------------- */
 
-@media (max-width: 425px) {
+@media (max-width: 768px) {
+    .container-fluid {
+        padding: 0 1rem !important;
+    }   
+}
+
+
+@media (max-width: 575px) {
     .main {
         flex-direction: column !important;
         width: 90vw;
@@ -294,5 +302,18 @@ body {
         justify-content: center;
         gap: 10px;
     }
+    
+    .container-fluid {
+        padding: 0 !important;
+    }
+
+    .answer-cards {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 320px) {
+
 }
 
