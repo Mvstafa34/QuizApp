@@ -8,42 +8,79 @@ AUDIO_SUCCESS.volume = 0.75;
 AUDIO_FAIL.volume = 0.75;
 
 
+function showStartScreen(theme) {
+    finishedQuestions = 0;
+    currentQuestion = 0;
+    rightAnswers = 0;
+    disableBackButton();
+    document.getElementById('end_screen').classList.add('d-none'); // Hide End Screen
+    enableAnswers();
+    resetButtons();
+    hideQuestionBody();
+    changeStartScreenTheme(theme);
+    document.getElementById('start_screen').classList.remove('d-none'); // Show Start Screen
+}
+
+
+function changeStartScreenTheme(theme) {
+    let themeElement = document.getElementById('theme');
+    let finishTheme = document.getElementById('finish_theme');
+    let startButton = document.getElementById('start_button');
+    let coding = document.getElementById('coding');
+    let fitness = document.getElementById('fitness');
+    let bitcoin = document.getElementById('bitcoin');
+    coding.classList.remove('selected');
+    fitness.classList.remove('selected');
+    bitcoin.classList.remove('selected');
+
+    if (theme == 'coding') {
+        themeCoding(themeElement, finishTheme, startButton);
+    } else if (theme == 'fitness') {
+        themeFitness(themeElement, finishTheme, startButton);
+    } else if (theme == 'bitcoin') {
+        themeBitcoin(themeElement, finishTheme, startButton);
+    }
+}
+
+
 function init(array) {
     currentQuestionsArray = array;
-    document.getElementById('start_screen').classList.add('d-none');
+    document.getElementById('start_screen').classList.add('d-none'); // Hide Start Screen
     showQuestionBody();
     startGame();
 }
 
 
 function startGame() {
-    let questions = currentQuestionsArray;
-
-    if (currentQuestion >= questions.length) {
-        // Show End Screen
+    if (gameIsOver()) {
         hideQuestionBody();
-        document.getElementById('end_screen').classList.remove('d-none');
-        document.getElementById('amount_of_questions').innerHTML = questions.length;
-        document.getElementById('right_answers').innerHTML = rightAnswers;
-
-    } else { // Show Question
-
-        let question = questions[currentQuestion];
-
-        document.getElementById('question').innerHTML = question['question'];
-        document.getElementById('answer_1').innerHTML = question['answer_1'];
-        document.getElementById('answer_2').innerHTML = question['answer_2'];
-        document.getElementById('answer_3').innerHTML = question['answer_3'];
-        document.getElementById('answer_4').innerHTML = question['answer_4'];
+        showEndScreen();
+    } else {
+        updateToNextQuestion();
     }
 }
 
 
-function answer(answerNum) {
-    let questions = currentQuestionsArray;
+function gameIsOver() {
+    return currentQuestion >= currentQuestionsArray.length;
+}
 
-    questions[currentQuestion]['chosen_answer'] = answerNum;
-    let question = questions[currentQuestion];
+
+function updateToNextQuestion() {
+    let question = currentQuestionsArray[currentQuestion];
+
+    document.getElementById('question').innerHTML = question['question'];
+    document.getElementById('answer_1').innerHTML = question['answer_1'];
+    document.getElementById('answer_2').innerHTML = question['answer_2'];
+    document.getElementById('answer_3').innerHTML = question['answer_3'];
+    document.getElementById('answer_4').innerHTML = question['answer_4'];
+}
+
+
+function answer(answerNum) {
+    let question = currentQuestionsArray[currentQuestion];
+    question['chosen_answer'] = answerNum; // Save answered Questions
+
     let rightAnswer = document.getElementById(`answer_${question['right_answer']}`).parentNode;
     let clickedAnswer = document.getElementById(`answer_${answerNum}`).parentNode;
 
@@ -60,8 +97,7 @@ function answer(answerNum) {
     }
 
     finishedQuestions++;
-    document.getElementById('right_button').disabled = false;
-    document.getElementById('next_button').classList.remove('disabled');
+    enableNextButton();
 }
 
 
@@ -71,8 +107,7 @@ function nextQuestion() {
     if (currentQuestion == finishedQuestions) {
         renderProgressBar();
         enableAnswers();
-        document.getElementById('right_button').disabled = true;
-        document.getElementById('next_button').classList.add('disabled');
+        disableNextButton();
     }
 
     resetButtons();
@@ -80,8 +115,8 @@ function nextQuestion() {
     if (currentQuestion != finishedQuestions) {
         displayQuestionResult();
     }
-    document.getElementById('left_button').disabled = false;
-    document.getElementById('previous_button').classList.remove('disabled');
+
+    enableBackButton();
     startGame();
 }
 
@@ -89,12 +124,10 @@ function nextQuestion() {
 function previousQuestion() {
     currentQuestion--;
     disableAnswers();
-    document.getElementById('right_button').disabled = false;
-    document.getElementById('next_button').classList.remove('disabled');
+    enableNextButton();
 
     if (currentQuestion == 0) {
-        document.getElementById('left_button').disabled = true;
-        document.getElementById('previous_button').classList.add('disabled');
+        disableBackButton();
     }
     resetButtons();
     displayQuestionResult();
@@ -102,47 +135,27 @@ function previousQuestion() {
 }
 
 
-function resetButtons() {
-    for (let i = 1; i < 5; i++) {
-        let button = document.getElementById(`answer_${i}`).parentNode;
-        button.classList.remove('bg-danger');
-        button.classList.remove('bg-success');
-    }
+function themeCoding(themeElement, finishTheme, startButton) {
+    themeElement.innerHTML = 'Coding';
+    finishTheme.innerHTML = 'CODING';
+    startButton.setAttribute('onclick', 'init(questionsCoding)');
+    document.getElementById('coding').classList.add('selected');
 }
 
 
-function renderProgressBar() {
-
-    let percent = currentQuestion / currentQuestionsArray.length;
-    percent = percent * 100;
-    document.getElementById('progress_bar').style.width = `${percent}%`;
+function themeFitness(themeElement, finishTheme, startButton) {
+    themeElement.innerHTML = 'Fitness';
+    finishTheme.innerHTML = 'FITNESS';
+    startButton.setAttribute('onclick', 'init(questionsFitness)');
+    document.getElementById('fitness').classList.add('selected');
 }
 
 
-function restartGame() {
-    finishedQuestions = 0;
-    currentQuestion = 0;
-    rightAnswers = 0;
-    document.getElementById('end_screen').classList.add('d-none'); // Hide End Screen
-    showQuestionBody();
-    document.getElementById('left_button').disabled = true;
-    document.getElementById('previous_button').classList.add('disabled');
-    renderProgressBar();
-    startGame();
-}
-
-
-function disableAnswers() {
-    for (let i = 1; i < 5; i++) {
-        document.getElementById(`answer_${i}`).parentNode.parentNode.disabled = true;
-    }
-}
-
-
-function enableAnswers() {
-    for (let i = 1; i < 5; i++) {
-        document.getElementById(`answer_${i}`).parentNode.parentNode.disabled = false;
-    }
+function themeBitcoin(themeElement, finishTheme, startButton) {
+    themeElement.innerHTML = 'Bitcoin';
+    finishTheme.innerHTML = 'BITCOIN';
+    startButton.setAttribute('onclick', 'init(questionsBitcoin)');
+    document.getElementById('bitcoin').classList.add('selected');
 }
 
 
@@ -160,10 +173,38 @@ function displayQuestionResult() {
 }
 
 
-function hideQuestionBody() {
-    document.getElementById('question').classList.add('d-none');
-    document.getElementById('answer_cards').classList.add('d-none');
-    document.getElementById('buttons').classList.add('d-none');
+function resetButtons() {
+    for (let i = 1; i < 5; i++) {
+        let button = document.getElementById(`answer_${i}`).parentNode;
+        button.classList.remove('bg-danger');
+        button.classList.remove('bg-success');
+    }
+}
+
+
+function renderProgressBar() {
+    let percent = currentQuestion / currentQuestionsArray.length;
+    percent = percent * 100;
+    document.getElementById('progress_bar').style.width = `${percent}%`;
+}
+
+
+function restartGame() {
+    finishedQuestions = 0;
+    currentQuestion = 0;
+    rightAnswers = 0;
+    document.getElementById('end_screen').classList.add('d-none'); // Hide End Screen
+    showQuestionBody();
+    disableBackButton();
+    renderProgressBar();
+    startGame();
+}
+
+
+function showEndScreen() {
+    document.getElementById('end_screen').classList.remove('d-none');
+    document.getElementById('amount_of_questions').innerHTML = currentQuestionsArray.length;
+    document.getElementById('right_answers').innerHTML = rightAnswers;
 }
 
 
@@ -174,44 +215,46 @@ function showQuestionBody() {
 }
 
 
-function showStartScreen(theme) {
-    finishedQuestions = 0;
-    currentQuestion = 0;
-    rightAnswers = 0;
+function hideQuestionBody() {
+    document.getElementById('question').classList.add('d-none');
+    document.getElementById('answer_cards').classList.add('d-none');
+    document.getElementById('buttons').classList.add('d-none');
+}
+
+
+function enableAnswers() {
+    for (let i = 1; i < 5; i++) {
+        document.getElementById(`answer_${i}`).parentNode.parentNode.disabled = false;
+    }
+}
+
+
+function disableAnswers() {
+    for (let i = 1; i < 5; i++) {
+        document.getElementById(`answer_${i}`).parentNode.parentNode.disabled = true;
+    }
+}
+
+
+function enableNextButton() {
+    document.getElementById('right_button').disabled = false;
+    document.getElementById('next_button').classList.remove('disabled');
+}
+
+
+function disableNextButton() {
+    document.getElementById('right_button').disabled = true;
+    document.getElementById('next_button').classList.add('disabled');
+}
+
+
+function enableBackButton() {
+    document.getElementById('left_button').disabled = false;
+    document.getElementById('previous_button').classList.remove('disabled');
+}
+
+
+function disableBackButton() {
     document.getElementById('left_button').disabled = true;
     document.getElementById('previous_button').classList.add('disabled');
-    document.getElementById('end_screen').classList.add('d-none');
-    
-    enableAnswers();
-    resetButtons();
-    hideQuestionBody();
-
-    let coding = document.getElementById('coding');
-    let fitness = document.getElementById('fitness');
-    let bitcoin = document.getElementById('bitcoin');
-
-    if (theme == 'coding') {
-        document.getElementById('theme').innerHTML = 'Coding';
-        document.getElementById('finish_theme').innerHTML = 'CODING';
-        document.getElementById('start_button').setAttribute('onclick','init(questionsCoding)');
-        fitness.classList.remove('selected');
-        bitcoin.classList.remove('selected');
-        coding.classList.add('selected');
-    } else if (theme == 'fitness') {
-        document.getElementById('theme').innerHTML = 'Fitness';
-        document.getElementById('finish_theme').innerHTML = 'FITNESS';
-        document.getElementById('start_button').setAttribute('onclick','init(questionsFitness)');
-        fitness.classList.add('selected');
-        bitcoin.classList.remove('selected');
-        coding.classList.remove('selected');
-    } else if (theme == 'bitcoin') {
-        document.getElementById('theme').innerHTML = 'Bitcoin';
-        document.getElementById('finish_theme').innerHTML = 'BITCOIN';
-        document.getElementById('start_button').setAttribute('onclick','init(questionsBitcoin)');
-        fitness.classList.remove('selected');
-        bitcoin.classList.add('selected');
-        coding.classList.remove('selected');
-    }
-
-    document.getElementById('start_screen').classList.remove('d-none');
 }
