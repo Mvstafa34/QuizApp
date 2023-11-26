@@ -274,13 +274,15 @@ body {
 @media (max-width: 575px) {
     .main {
         flex-direction: column !important;
-        width: 90vw;
-        height: 95vh !important;
+        width: 100vw;
+        height: 97.7vh !important;
     }
 
     .container {
         min-height: unset;
         height: 100vh;
+        align-items: unset;
+        padding: 0 !important;
     }
     
     .nav-selection {
@@ -309,6 +311,9 @@ body {
 
     .answer-cards {
         width: 100%;
+    }
+    .answer {
+        word-break: break-word;
     }
 }
 
