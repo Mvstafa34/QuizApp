@@ -1,69 +1,4 @@
-let questions = [
-    {
-        "question": "Wer hat HTML erfunden?",
-        "answer_1": "Robbie Williams",
-        "answer_2": "Lady Gaga",
-        "answer_3": "Tim Berners-Lee",
-        "answer_4": "Justin Bieber",
-        "right_answer": 3,
-        "chosen_answer": 0
-    },
-    {
-        "question": "Was bedeutet das HTML Tag &lt;a&gt;?",
-        "answer_1": "Text Fett",
-        "answer_2": "Container",
-        "answer_3": "Ein Link",
-        "answer_4": "Kursiv",
-        "right_answer": 3,
-        "chosen_answer": 0
-    },
-    {
-        "question": "Wie bindet man eine Website in eine Website ein?",
-        "answer_1": "&lt;iframe&gt;, &lt;frame&gt;, und &lt;frameset&gt;",
-        "answer_2": "&lt;iframe&gt;",
-        "answer_3": "&lt;frame&gt;",
-        "answer_4": "&lt;frameset&gt;",
-        "right_answer": 2,
-        "chosen_answer": 0
-    },
-    {
-        "question": "Wie stellt man Text am BESTEN fett dar?",
-        "answer_1": "&lt;strong&gt;",
-        "answer_2": "CSS nutzen",
-        "answer_3": "&lt;bold&gt;",
-        "answer_4": "&lt;b&gt;",
-        "right_answer": 1,
-        "chosen_answer": 0
-    },
-    {
-        "question": "Welches Attribut kann man NICHT für Textarea verwenden?",
-        "answer_1": "readonly",
-        "answer_2": "max",
-        "answer_3": "from",
-        "answer_4": "spellcheck",
-        "right_answer": 1,
-        "chosen_answer": 0
-    },
-    {
-        "question": "Wie wählst du alle Elemente vom Typ &lt;a&gt; mit dem attribut title aus?",
-        "answer_1": "a[title] {...}",
-        "answer_2": "a > title {...}",
-        "answer_3": "a.title {...}",
-        "answer_4": "a=title {...}",
-        "right_answer": 1,
-        "chosen_answer": 0
-    },
-    {
-        "question": "Wie definiert man in Javascript eine Variable?",
-        "answer_1": "let 100 = rate",
-        "answer_2": "100 = let rate",
-        "answer_3": "rate = 100",
-        "answer_4": "let rate = 100",
-        "right_answer": 4,
-        "chosen_answer": 0
-    }
-];
-
+let currentQuestionsArray;
 let currentQuestion = 0;
 let finishedQuestions = 0;
 let rightAnswers = 0;
@@ -72,17 +7,25 @@ let AUDIO_FAIL = new Audio('./audio/wrong.mp3');
 AUDIO_SUCCESS.volume = 0.75;
 AUDIO_FAIL.volume = 0.75;
 
-function loadHTML() {
+
+function init(array) {
+    currentQuestionsArray = array;
+    document.getElementById('start_screen').classList.add('d-none');
+    showQuestionBody();
+    startGame();
+}
+
+
+function startGame() {
+    let questions = currentQuestionsArray;
 
     if (currentQuestion >= questions.length) {
         // Show End Screen
-        document.getElementById('question').classList.add('d-none');
-        document.getElementById('answer_cards').classList.add('d-none');
-        document.getElementById('buttons').classList.add('d-none');
+        hideQuestionBody();
         document.getElementById('end_screen').classList.remove('d-none');
         document.getElementById('amount_of_questions').innerHTML = questions.length;
         document.getElementById('right_answers').innerHTML = rightAnswers;
-        
+
     } else { // Show Question
 
         let question = questions[currentQuestion];
@@ -97,6 +40,8 @@ function loadHTML() {
 
 
 function answer(answerNum) {
+    let questions = currentQuestionsArray;
+
     questions[currentQuestion]['chosen_answer'] = answerNum;
     let question = questions[currentQuestion];
     let rightAnswer = document.getElementById(`answer_${question['right_answer']}`).parentNode;
@@ -129,15 +74,15 @@ function nextQuestion() {
         document.getElementById('right_button').disabled = true;
         document.getElementById('next_button').classList.add('disabled');
     }
-    
+
     resetButtons();
 
     if (currentQuestion != finishedQuestions) {
         displayQuestionResult();
-    } 
+    }
     document.getElementById('left_button').disabled = false;
     document.getElementById('previous_button').classList.remove('disabled');
-    loadHTML();
+    startGame();
 }
 
 
@@ -153,7 +98,7 @@ function previousQuestion() {
     }
     resetButtons();
     displayQuestionResult();
-    loadHTML();
+    startGame();
 }
 
 
@@ -167,7 +112,8 @@ function resetButtons() {
 
 
 function renderProgressBar() {
-    let percent = currentQuestion/ questions.length;
+
+    let percent = currentQuestion / currentQuestionsArray.length;
     percent = percent * 100;
     document.getElementById('progress_bar').style.width = `${percent}%`;
 }
@@ -178,11 +124,11 @@ function restartGame() {
     currentQuestion = 0;
     rightAnswers = 0;
     document.getElementById('end_screen').classList.add('d-none'); // Hide End Screen
-    document.getElementById('question').classList.remove('d-none'); // Show Question Body
-    document.getElementById('answer_cards').classList.remove('d-none');
-    document.getElementById('buttons').classList.remove('d-none'); 
+    showQuestionBody();
+    document.getElementById('left_button').disabled = true;
+    document.getElementById('previous_button').classList.add('disabled');
     renderProgressBar();
-    loadHTML();
+    startGame();
 }
 
 
@@ -201,6 +147,7 @@ function enableAnswers() {
 
 
 function displayQuestionResult() {
+    let questions = currentQuestionsArray;
     let rightAnswer = questions[currentQuestion]['right_answer'];
     let chosenAnswer = questions[currentQuestion]['chosen_answer'];
 
@@ -210,4 +157,48 @@ function displayQuestionResult() {
         document.getElementById(`answer_${chosenAnswer}`).parentNode.classList.add('bg-danger');
         document.getElementById(`answer_${rightAnswer}`).parentNode.classList.add('bg-success');
     }
+}
+
+
+function hideQuestionBody() {
+    document.getElementById('question').classList.add('d-none');
+    document.getElementById('answer_cards').classList.add('d-none');
+    document.getElementById('buttons').classList.add('d-none');
+}
+
+
+function showQuestionBody() {
+    document.getElementById('question').classList.remove('d-none');
+    document.getElementById('answer_cards').classList.remove('d-none');
+    document.getElementById('buttons').classList.remove('d-none');
+}
+
+
+function showStartScreen(theme) {
+    finishedQuestions = 0;
+    currentQuestion = 0;
+    rightAnswers = 0;
+    document.getElementById('left_button').disabled = true;
+    document.getElementById('previous_button').classList.add('disabled');
+    document.getElementById('end_screen').classList.add('d-none');
+    
+    enableAnswers();
+    resetButtons();
+    hideQuestionBody();
+
+    if (theme == 'coding') {
+        document.getElementById('theme').innerHTML = 'Coding';
+        document.getElementById('finish_theme').innerHTML = 'CODING';
+        document.getElementById('start_button').setAttribute('onclick','init(questionsCoding)');
+    } else if (theme == 'fitness') {
+        document.getElementById('theme').innerHTML = 'Fitness';
+        document.getElementById('finish_theme').innerHTML = 'FITNESS';
+        document.getElementById('start_button').setAttribute('onclick','init(questionsFitness)');
+    } else if (theme == 'bitcoin') {
+        document.getElementById('theme').innerHTML = 'Bitcoin';
+        document.getElementById('finish_theme').innerHTML = 'BITCOIN';
+        document.getElementById('start_button').setAttribute('onclick','init(questionsBitcoin)');
+    }
+
+    document.getElementById('start_screen').classList.remove('d-none');
 }
