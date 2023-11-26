@@ -1,4 +1,4 @@
-let currentQuestionsArray;
+let currentQuestionsArray = 0;
 let currentQuestion = 0;
 let finishedQuestions = 0;
 let rightAnswers = 0;
@@ -16,6 +16,7 @@ function showStartScreen(theme) {
     document.getElementById('end_screen').classList.add('d-none'); // Hide End Screen
     enableAnswers();
     resetButtons();
+    renderProgressBar();
     hideQuestionBody();
     changeStartScreenTheme(theme);
     document.getElementById('start_screen').classList.remove('d-none'); // Show Start Screen
