@@ -186,18 +186,31 @@ function showStartScreen(theme) {
     resetButtons();
     hideQuestionBody();
 
+    let coding = document.getElementById('coding');
+    let fitness = document.getElementById('fitness');
+    let bitcoin = document.getElementById('bitcoin');
+
     if (theme == 'coding') {
         document.getElementById('theme').innerHTML = 'Coding';
         document.getElementById('finish_theme').innerHTML = 'CODING';
         document.getElementById('start_button').setAttribute('onclick','init(questionsCoding)');
+        fitness.classList.remove('selected');
+        bitcoin.classList.remove('selected');
+        coding.classList.add('selected');
     } else if (theme == 'fitness') {
         document.getElementById('theme').innerHTML = 'Fitness';
         document.getElementById('finish_theme').innerHTML = 'FITNESS';
         document.getElementById('start_button').setAttribute('onclick','init(questionsFitness)');
+        fitness.classList.add('selected');
+        bitcoin.classList.remove('selected');
+        coding.classList.remove('selected');
     } else if (theme == 'bitcoin') {
         document.getElementById('theme').innerHTML = 'Bitcoin';
         document.getElementById('finish_theme').innerHTML = 'BITCOIN';
         document.getElementById('start_button').setAttribute('onclick','init(questionsBitcoin)');
+        fitness.classList.remove('selected');
+        bitcoin.classList.add('selected');
+        coding.classList.remove('selected');
     }
 
     document.getElementById('start_screen').classList.remove('d-none');
